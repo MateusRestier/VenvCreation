@@ -20,12 +20,24 @@ if not exist "%current_dir%venv\" (
 :: Ativar o ambiente virtual (Windows)
 call "%current_dir%venv\Scripts\activate"
 
-:: Instalar as bibliotecas do arquivo requirements.txt
-if exist "%current_dir%requirements.txt" (
-    call pip install -r "%current_dir%requirements.txt"
-) else (
-    echo Arquivo requirements.txt não encontrado.
+:: Verificar se o arquivo .gitignore existe, se não, cria
+if not exist "%current_dir%.gitignore" (
+    echo venv > "%current_dir%.gitignore"
+    echo Arquivo .gitignore criado com "venv" nele.
 )
+
+:: Verificar se o arquivo requirements.txt existe, se não, cria
+if not exist "%current_dir%requirements.txt" (
+    echo openpyxl> "%current_dir%requirements.txt"
+    echo python-dotenv>> "%current_dir%requirements.txt"
+    echo pandas>> "%current_dir%requirements.txt"
+    echo Arquivo requirements.txt criado com bibliotecas padrão.
+) else (
+    echo Arquivo requirements.txt já existe.
+)
+
+:: Instalar as bibliotecas do arquivo requirements.txt
+call pip install -r "%current_dir%requirements.txt"
 
 :: Confirmar que as bibliotecas foram instaladas
 echo Bibliotecas instaladas com sucesso do arquivo requirements.txt.
