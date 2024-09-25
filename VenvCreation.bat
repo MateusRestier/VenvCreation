@@ -23,7 +23,12 @@ call "%current_dir%venv\Scripts\activate"
 :: Verificar se o arquivo .gitignore existe, se não, cria
 if not exist "%current_dir%.gitignore" (
     echo venv > "%current_dir%.gitignore"
-    echo Arquivo .gitignore criado com "venv" nele.
+    echo .env > "%current_dir%.gitignore"
+    echo .idea/ > "%current_dir%.gitignore"
+    echo **/__pycache__/ > "%current_dir%.gitignore"
+    echo *.tmp > "%current_dir%.gitignore"
+    echo *.swp > "%current_dir%.gitignore"
+    echo Arquivo .gitignore criado com "venv, .env,.idea/, **/__pycache__/, *.tmp, *.swp" nele.
 )
 
 :: Verificar se o arquivo requirements.txt existe, se não, cria
